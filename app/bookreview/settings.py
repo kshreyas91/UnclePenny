@@ -36,7 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bookreview',
+    'unclesback',
     'rest_framework',
     'generate_scaffold',
 )
@@ -50,9 +50,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'bookreview.urls'
+ROOT_URLCONF = 'unclesback.urls'
 
-WSGI_APPLICATION = 'bookreview.wsgi.application'
+WSGI_APPLICATION = 'unclesback.wsgi.application'
 
 
 # Database
@@ -61,7 +61,7 @@ WSGI_APPLICATION = 'bookreview.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'bookreview.db.sqlite3',
+        'NAME': 'unclesback.db.sqlite3',
     }
 }
 

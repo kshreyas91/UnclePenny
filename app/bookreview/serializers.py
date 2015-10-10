@@ -1,14 +1,33 @@
 from rest_framework import serializers
 
-from bookreview.models import (
-    Author,
-    Book,
+from unclesback.models import (
+    Team,
+    Challenge,
+    User,
+    ActivityFeed
 )
 
 
-class AuthorSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = Author
+        model = User
         fields = ('id', 'first_name', 'last_name')
 
+class TeamSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Team
+        fields = ('id', 'members', 'status')
+
+class ChallengeSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Challenge
+        fields = ('id', 'challenge_name', 'challenge_details','start_date','end_date')
+  
+class ActivityFeedSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = ActivityFeed
+        fields = ('id')
