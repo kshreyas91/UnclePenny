@@ -54,7 +54,6 @@ ROOT_URLCONF = 'bookreview.urls'
 
 WSGI_APPLICATION = 'bookreview.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
