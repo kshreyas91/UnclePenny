@@ -1,4 +1,5 @@
 from django.db import models
+from listField import ListField
 
 class UserManager(models.Manager):
     pass 
@@ -49,7 +50,7 @@ class TeamManager(models.Manager):
 class Team(models.Model):
     objects = TeamManager()
     members = ListField()
-    challenge_name = models.ForeignKey(Challenge,related_name='challenge_name')
+    challenge_name = models.CharField(max_length=200)#models.ForeignKey(Challenge,related_name='challenge_name')
     status = models.DecimalField(max_digits=5,decimal_places = 2)
 
     def __unicode__(self):
