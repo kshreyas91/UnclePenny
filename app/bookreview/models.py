@@ -27,9 +27,23 @@ class Author(models.Model):
     def __unicode__(self):
         return '{} {}'.format(self.first_name, self.last_name)
 
-
-class BookManager(models.Manager):
+class ChallengeManager(models.Manager):
     pass
+
+
+class Challenge(models.Manager):
+    objects = ChallengeManager()
+    title = models.CharField(max_length=200)
+    isbn = models.CharField(max_length=20)
+    author = models.ForeignKey(Author, related_name='books')
+
+
+class TeamManager(models.Manager):
+    pass
+
+class Team(models.Model):
+    objects = TeamManager()
+    members = ListField()
 
 
 class Book(models.Model):
