@@ -50,7 +50,7 @@ def login_user(request):
 	userObject = UserProfile.objects.get(username=u_username)
 	if userObject is None:
 		op_status = StatusObject.objects.create(status="failed", message="User Doesnt Exist")
-	else
+	else:
 		if userObject.password == u_password:
 			op_status = StatusObject.objects.create(status="success", message=userObject.firstName + ":" + userObject.username)
 		else:
