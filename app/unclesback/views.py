@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from unclesback.models import UserProfile
 from unclesback.models import StatusObject
 from unclesback.models import Challenge
+from unclesback.serializers import *
 from unclesback.models import ActivityFeed
 from unclesback.models import Team
 

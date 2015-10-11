@@ -12,8 +12,8 @@ class UserProfile(models.Model):
     banknumber = models.CharField(max_length=15)
     password = models.CharField(max_length=25)
     bankname = models.CharField(max_length=100)
-    currentsavings = models.DecimalField(max_digits=10,decimal_places = 2)
-    futureestimate = models.DecimalField(max_digits=10,decimal_places = 2)
+    currentsavings = models.DecimalField(max_digits=10,decimal_places = 2,default=0.0)
+    futureestimate = models.DecimalField(max_digits=10,decimal_places = 2,default=0.0)
 
     def __unicode__(self):
         return '{} {}'.format(self.firstname, self.lastname, self.username, self.banknumber, self.password, self.bankname,self.currentsavings,self.futureestimate)
