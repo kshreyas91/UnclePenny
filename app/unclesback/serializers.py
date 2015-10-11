@@ -13,7 +13,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = UserProfile
-        fields = ('id', 'first_name', 'last_name')
+        fields = ('id', 'firstname', 'lastname')
 
 
 class StatusObjectSerializer(serializers.ModelSerializer):
@@ -21,3 +21,8 @@ class StatusObjectSerializer(serializers.ModelSerializer):
 		model = StatusObject
 		fields = ('status', 'message')
 
+
+class ChallengeSerisalizer(serializers.ModelSerializer):
+    class Meta:
+        model = Challenge
+        fields = ('challenge_name','challenge_details')

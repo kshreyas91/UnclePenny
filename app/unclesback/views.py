@@ -32,13 +32,13 @@ def test(request, u,v):
 	return JsonResponse(jsondata.data)
 
 def signup_user(request):
-	username = request.GET.get('phonenumber', "")
+	username = request.GET.get('username', "")
 	password = request.GET.get('password', "")
 	firstname = request.GET.get('firstname', "")
 	lastname = request.GET.get('lastname', "")
 	bankname = request.GET.get('bankname', "")
 	banknumber = request.GET.get('banknumber', "")
-	user_profile = UserProfile.objects.create(firstname= firstname, lastname = lastname, password= password, banknumber=banknumber, bankname=bankname, username= username)
+	user_profile = UserProfile.objects.create(firstname= firstname, lastname = lastname, password= password, banknumber=banknumber, bankname=bankname, username=username)
 	user_profile.save()
 	op_status = StatusObject.objects.create(status="success", message="User Created")
 	jsondata = StatusObjectSerializer(op_status)
@@ -48,15 +48,16 @@ def signup_user(request):
 def login_user(request):
 	u_username = request.GET.get('username', "")
 	u_password = request.GET.get('password', "")
-	userObject = UserProfile.objects.get(username=u_username)
+	userObject = UserProfile.objects.filter(username=u_username)
 	if userObject is None:
 		op_status = StatusObject.objects.create(status="failed", message="User Doesnt Exist")
-	else:
-		if userObject.password == u_password:
-			op_status = StatusObject.objects.create(status="success", message=userObject.firstName + ":" + userObject.username)
-		else:
-			op_status = StatusObject.objects.create(status="failed", message="Username and password doesnt match")
-	jsondata = StatusObjectSerializer(op_status)
+	print >>sys.stderr, UserProfile.objects.get(pk=1).username
+    #else:
+		#if userObject['password'] == u_password:
+		#op_status = StatusObject.objects.create(status="success", message=userObject.firstname + ":" + userObject.username)
+		#else:
+		#	op_status = StatusObject.objects.create(status="failed", message="Username and password doesnt match")
+	jsondata = UserProfileSerializer(userObject[0])
 	return JsonResponse(jsondata.data)
 
 	
