@@ -5,7 +5,7 @@ from unclesback.models import (
     Challenge,
     Team,
     ActivityFeed,
-    StatusObject
+    StatusObject,
 )
 
 
