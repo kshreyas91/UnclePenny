@@ -20,6 +20,7 @@ class StatusObjectSerializer(serializers.ModelSerializer):
 		model = StatusObject
 		fields = ('status', 'message')
 
+
 class ChallengeSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Challenge

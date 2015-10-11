@@ -5,8 +5,12 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from unclesback.models import *
+from unclesback.models import UserProfile
+from unclesback.models import StatusObject
+from unclesback.models import Challenge
 from unclesback.serializers import *
+from unclesback.models import ActivityFeed
+from unclesback.models import Team
 
 import logging
 import sys
@@ -38,7 +42,7 @@ def signup_user(request):
 	lastname = request.GET.get('lastname', "")
 	bankname = request.GET.get('bankname', "")
 	banknumber = request.GET.get('banknumber', "")
-	user_profile = UserProfile.objects.create(firstname= firstname, lastname = lastname, password= password, banknumber=banknumber, bankname=bankname, username= username)
+	user_profile = UserProfile.objects.create(firstname= firstname, lastname = lastname, password= password, banknumber=banknumber, bankname=bankname, username=username)
 	user_profile.save()
 	op_status = StatusObject.objects.create(status="success", message="User Created")
 	jsondata = StatusObjectSerializer(op_status)

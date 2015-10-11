@@ -15,7 +15,6 @@ class UserProfile(models.Model):
     currentsavings = models.CharField(max_length=100, default=0)
     futureestimate = models.CharField(max_length=100, default=0)
     currentChallenge = models.CharField(max_length=100, default="")
-
     def __unicode__(self):
         return '{} {}'.format(self.firstname, self.lastname, self.username, self.banknumber, self.password, self.bankname,self.currentsavings,self.futureestimate)
 
