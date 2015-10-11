@@ -1,16 +1,18 @@
 from rest_framework import serializers
 
 from unclesback.models import (
-    Author,
-    Book,
+    UserProfile,
+    Challenge,
+    Team,
+    ActivityFeed,
     StatusObject,
 )
 
 
-class AuthorSerializer(serializers.ModelSerializer):
+class UserProfileSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = Author
+        model = UserProfile
         fields = ('id', 'first_name', 'last_name')
 
 

@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('bookreview', '0001_initial'),
+        ('unclesback', '0001_initial'),
     ]
 
     operations = [

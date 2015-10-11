@@ -10,23 +10,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='Author',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('first_name', models.CharField(max_length=200)),
-                ('last_name', models.CharField(max_length=200)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Book',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('title', models.CharField(max_length=200)),
-                ('isbn', models.CharField(max_length=20)),
-                ('author', models.ForeignKey(related_name='books', to='bookreview.Author')),
-            ],
-        ),
+     
         migrations.CreateModel(
             name='UserProfile',
             fields=[

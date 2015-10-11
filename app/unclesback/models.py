@@ -1,4 +1,5 @@
 from django.db import models
+from listField import ListField
 
 class UserProfileManager(models.Manager):
     pass 
@@ -11,8 +12,11 @@ class UserProfile(models.Model):
     banknumber = models.CharField(max_length=15)
     password = models.CharField(max_length=25)
     bankname = models.CharField(max_length=100)
+    currentsavings = models.DecimalField(max_digits=10,decimal_places = 2)
+    futureestimate = models.DecimalField(max_digits=10,decimal_places = 2)
+
     def __unicode__(self):
-        return '{} {}'.format(self.firstname, self.lastname, self.username, self.banknumber, self.password, self.bankname)
+        return '{} {}'.format(self.firstname, self.lastname, self.username, self.banknumber, self.password, self.bankname,self.currentsavings,self.futureestimate)
 
 class StatusObjectManager(models.Manager):
     pass 
@@ -24,8 +28,6 @@ class StatusObject(models.Model):
 
     def __unicode__(self):
         return '{} {}'.format(self.status, self.message)
-
-from listField import ListField
 
 
 # class AuthorManager(models.Manager):
@@ -59,7 +61,7 @@ class TeamManager(models.Manager):
 
 class Team(models.Model):
     objects = TeamManager()
-    members = ListField()
+    members = ListField()#a list of names (could be (name,id) as well--undecided) of members who are participating
     challenge_name = models.CharField(max_length=200)#models.ForeignKey(Challenge,related_name='challenge_name')
     status = models.DecimalField(max_digits=5,decimal_places = 2)
 
