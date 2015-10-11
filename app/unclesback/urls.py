@@ -16,7 +16,9 @@ urlpatterns = patterns(
     url(r'^listGroupChallenge/$', views.listGroupChallege, name="list_group"),
     url(r'^addNewTeam/$', views.addNewTeam, name="team_add"),
     url(r'^listTeams/$', views.listAllTeamForChallenge, name="list_teams"),
-    
+	url(r'^enrollIndividually/$', views.enrollSingleChallenge, name="list_teams"),
+	url(r'^enrollWithTeam/$', views.joinTeam, name="enroll_ind"),
+	url(r'^getCurrentChallenge/$', views.getUsersCurrentChallenge, name="currentChallenge"),
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)

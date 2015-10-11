@@ -11,6 +11,7 @@ from unclesback.serializers import *
 import logging
 import sys
 import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 
 def index_view(request):
@@ -49,21 +50,19 @@ def signup_user(request):
 # Challege CRUD Operations
 
 def listChallenges(request):
-	challenges = Challenge.objects.all()
+	challenges = Challenge.objects.get(id=1)
 	jsonData = ChallengeSerializer(challenges)
 	return JsonResponse(jsonData)
 
 def listSingleChallenge(request):
-	challenges = Challenge.objects.all()
-	#jsonData = ChallengeSerializer(list(challenges))
-	print >>sys.stderr, challenges.values
-	return JsonResponse(list(challenges), safe=False)
+	challenges = Challenge.objects.filter(is_single=1)
+	jsonData = ChallengeSerializer(challenges)
+	return JsonResponse(jsonData.data, safe=False)
 
 def listGroupChallege(request):
-	challenges = Challenge.objects.filter(is_single=0)
-	print >>sys.stderr, challenges
-	#jsonData = ChallengeSerializer(list(challenges))
-	return JsonResponse(list(challenges), safe=False)
+	challenges = Challenge.objects.filter(is_single=1)
+	jsonData = ChallengeSerializer(challenges)
+	return JsonResponse(jsonData.data, safe=False)
 
 
 def addNewChallege(request):
@@ -96,6 +95,14 @@ def joinTeam(request):
 	teamid = request.GET.get('teamid', "")
 	teamMemberTuple = TeamMember.object.create(userid= userid, teamid= teamid)
 	teamMemberTuple.save()
+
+	teamRow = Team.objects.get(id=teamid)
+	challengeId = teamRow.challenge_id
+
+	userRow = UserProfile.objects.get(id=userid)
+	userRow.currentChallenge = challengeId
+	userRow.save()
+
 	op_status = StatusObject.objects.create(status="success", message="You have succesfully joined a team")
 	jsondata = StatusObjectSerializer(op_status)
 	return JsonResponse(jsondata.data)
@@ -104,7 +111,7 @@ def listAllTeamForChallenge(request):
 	challengeId = request.GET.get('cid','')
 	teamArray = Team.objects.filter(challenge_id = challengeId)
 	jsondata = TeamSerializer(teamArray)
-	return JsonResponse(jsondata, safe=False)
+	return JsonResponse(jsondata.data, safe=False)
 
 # Team CRUD Operations ENDS
 
@@ -114,8 +121,13 @@ def listAllTeamForChallenge(request):
 def enrollSingleChallenge(request):
 	userid = request.GET.get('userid', '')
 	challenge_id = request.GET.get("cid","")
-	singleChallengeEnrollTuple = SingleChallengeMemebers.objects.create(userid=userid,challenge_id=challenge_id)
+	singleChallengeEnrollTuple = SingleChallegeMemebers.objects.create(userid=userid,challenge_id=challenge_id)
 	singleChallengeEnrollTuple.save()
+
+	userRow = UserProfile.objects.get(id=userid)
+	userRow.currentChallenge = challenge_id
+	userRow.save()
+
 	op_status = StatusObject.objects.create(status="success", message="You have succesfully taken up a challenge")
 	jsondata = StatusObjectSerializer(op_status)
 	return JsonResponse(jsondata.data)
@@ -141,12 +153,12 @@ def  getUsersCurrentChallenge(request):
 			challengeTuple = Challenge.objects.filter(id=challenge_id)
 
 			jsondata = ChallengeSerializer(challengeTuple[0])
-			return JsonResponse(jsondata)
+			return JsonResponse(jsondata.data, safe=False)
 		else:
 			challenge_id = singleChallenge[0].challenge_id
 			challengeTuple = Challenge.objects.filter(id=challenge_id)
 			jsondata = ChallengeSerializer(challengeTuple[0])
-			return JsonResponse(jsondata)
+			return JsonResponse(jsondata.data, safe=False)
 
 # Get user's current Challenge - END
 

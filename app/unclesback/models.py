@@ -41,9 +41,8 @@ class Challenge(models.Model):
     start_date = models.CharField(max_length=100)
     end_date = models.CharField(max_length=100)
     is_single = models.IntegerField(max_length=1)
-    def __unicode__(self):
-        return '{} {}'.format(self.challenge_name, self.challenge_details, self.start_date, self.end_date, self.is_single)
 
+    
 class TeamManager(models.Manager):
     pass
 

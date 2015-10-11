@@ -53,7 +53,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'unclesback.urls'
 
 WSGI_APPLICATION = 'unclesback.wsgi.application'
-
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
