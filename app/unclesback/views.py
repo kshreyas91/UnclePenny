@@ -39,8 +39,24 @@ def signup_user(request):
 	banknumber = request.GET.get('banknumber', "")
 	user_profile = UserProfile.objects.create(firstname= firstname, lastname = lastname, password= password, banknumber=banknumber, bankname=bankname, username= username)
 	user_profile.save()
-	print >>sys.stderr, "User details saved"
-
 	op_status = StatusObject.objects.create(status="success", message="User Created")
 	jsondata = StatusObjectSerializer(op_status)
 	return JsonResponse(jsondata.data)
+
+
+def login_user(request):
+	u_username = request.GET.get('username', "")
+	u_password = request.GET.get('password', "")
+	userObject = UserProfile.objects.get(username=u_username)
+	if userObject is None:
+		op_status = StatusObject.objects.create(status="failed", message="User Doesnt Exist")
+	else
+		if userObject.password == u_password:
+			op_status = StatusObject.objects.create(status="success", message=userObject.firstName + ":" + userObject.username)
+		else:
+			op_status = StatusObject.objects.create(status="failed", message="Username and password doesnt match")
+	jsondata = StatusObjectSerializer(op_status)
+	return JsonResponse(jsondata.data)
+
+	
+

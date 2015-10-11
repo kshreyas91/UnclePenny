@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from bookreview.models import (
+from unclesback.models import (
     Author,
     Book,
     StatusObject,
